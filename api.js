@@ -1,4 +1,5 @@
 const express = require("express");
+const xlsx = require('xlsx');
 const bodyParser = require("body-parser");
 const app = express();
 app.use(express.json());
@@ -8,8 +9,17 @@ app.get("/", function (req, res) {
 });
 
 app.post("/data", function (req, res) {
-	console.log(req.body.name);
+	console.log(req.body.firstname);
+	console.log(req.body.lastname);
 	console.log(req.body.email);
+	console.log(req.body.number);
+	console.log(req.body.password);
+	const data = req.body;
+	const workbook = xlsx.utils.book_new();
+	const sheet = xlsx.utils.json_to_sheet([data]);
+	xlsx.utils.book_append_sheet(workbook, sheet, 'Data');
+	xlsx.writeFile(workbook, 'data.xlsx');
+	res.send('Form submitted successfully!');
 });
 
 app.listen(3000, function () {
