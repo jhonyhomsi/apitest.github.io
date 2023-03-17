@@ -14,10 +14,11 @@ app.post("/data", function (req, res) {
 	console.log(req.body.email);
 	console.log(req.body.number);
 	console.log(req.body.password);
+	const name = req.body.firstname
 	const data = req.body;
 	const workbook = xlsx.utils.book_new();
 	const sheet = xlsx.utils.json_to_sheet([data]);
-	xlsx.utils.book_append_sheet(workbook, sheet, 'Data');
+	xlsx.utils.book_append_sheet(workbook, sheet, `${name}`);
 	xlsx.writeFile(workbook, 'data.xlsx');
 	res.send('Form submitted successfully!');
 });
