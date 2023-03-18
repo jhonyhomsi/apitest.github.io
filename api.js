@@ -14,7 +14,7 @@ app.post("/data", function (req, res) {
 	console.log(req.body.email);
 	console.log(req.body.number);
 	console.log(req.body.password);
-	const name = req.body.firstname
+	const name = req.body.firstname;
 	const data = req.body;
 	const workbook = xlsx.utils.book_new();
 	const sheet = xlsx.utils.json_to_sheet([data]);
